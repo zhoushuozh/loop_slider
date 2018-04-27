@@ -39,9 +39,7 @@ function slide(index){
     $("#wraper .pagination span").eq(now-1).addClass('on').siblings().removeClass('on')
 }
 
-$("#wraper .pagination span").on('click', function () {
-    slide($(this).index()+1);
-});
+$("#wraper .pagination span").on('click', function() { slide($(this).index()+1) } );
 
 $("#wraper .btn-prev").on('click', () => slide('prev'));
 $("#wraper .btn-next").on('click', () => slide('next'));
@@ -53,3 +51,11 @@ function setTimer() {
 }
 
 $wrap.on('mouseenter', () => clearInterval(timerId) ).on('mouseleave', () => timerId = setTimer() );
+
+$(document).on('visibilitychange',()=>{
+    if(document.hidden){
+        clearInterval(timerId)
+    }else{
+        timerId = setTimer()
+    }
+});
